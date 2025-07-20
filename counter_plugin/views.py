@@ -6,7 +6,7 @@ from .forms import AccessListCounterForm
 class AccessListCounterView(View):
     def get(self, request):
         counter, created = AccessListCounter.objects.get_or_create(name="default")
-        return render(request, 'netbox_access_lists/counter.html', {'counter': counter})
+        return render(request, 'counter_plugin/counter.html', {'counter': counter})
 
     def post(self, request):
         counter, created = AccessListCounter.objects.get_or_create(name="default")
