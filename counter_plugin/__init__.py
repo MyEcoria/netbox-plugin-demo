@@ -1,7 +1,7 @@
 from netbox.plugins import PluginConfig
 
 class NetBoxAccessListsConfig(PluginConfig):
-    name = 'counter-plugin'
+    name = 'counter_plugin'
     verbose_name = 'Access Lists'
     description = 'A simple plugin to demonstrate a basic counter.'
     version = '0.3'
