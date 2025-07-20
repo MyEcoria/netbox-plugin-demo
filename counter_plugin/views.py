@@ -12,4 +12,4 @@ class AccessListCounterView(View):
         counter, created = AccessListCounter.objects.get_or_create(name="default")
         counter.value += 1
         counter.save()
-        return redirect('plugins:netbox_access_lists:counter')
+        return redirect('plugins:counter_plugin:counter')
