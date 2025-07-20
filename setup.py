@@ -7,5 +7,8 @@ setup(
     install_requires=[],
     packages=find_packages(),
     include_package_data=True,
+    package_data={
+        'counter_plugin': ['templates/counter_plugin/*.html'],
+    },
     zip_safe=False,
 )

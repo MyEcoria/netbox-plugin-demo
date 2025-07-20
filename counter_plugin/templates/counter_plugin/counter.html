@@ -3,13 +3,13 @@
 {% block content %}
 <div class="panel panel-default">
     <div class="panel-heading">
-        <strong>Counter</strong>
+        <strong>Access Lists Counter</strong>
     </div>
     <div class="panel-body">
         <p>Current value: {{ counter.value }}</p>
         <form method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary">Increment Counter</button>
         </form>
     </div>
 </div>
