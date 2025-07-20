@@ -1,50 +1,15 @@
-from django.db.models import Count
+from django.shortcuts import render, redirect
+from django.views import View
+from .models import AccessListCounter
+from .forms import AccessListCounterForm
 
-from netbox.views import generic
-from . import forms, models, tables
+class AccessListCounterView(View):
+    def get(self, request):
+        counter, created = AccessListCounter.objects.get_or_create(name="default")
+        return render(request, 'netbox_access_lists/counter.html', {'counter': counter})
 
-
-#
-# AccessList views
-#
-
-class AccessListView(generic.ObjectView):
-    queryset = models.AccessList.objects.all()
-
-
-class AccessListListView(generic.ObjectListView):
-    queryset = models.AccessList.objects.annotate(
-        rule_count=Count('rules')
-    )
-    table = tables.AccessListTable
-
-
-class AccessListEditView(generic.ObjectEditView):
-    queryset = models.AccessList.objects.all()
-    form = forms.AccessListForm
-
-
-class AccessListDeleteView(generic.ObjectDeleteView):
-    queryset = models.AccessList.objects.all()
-
-
-#
-# AccessListRule views
-#
-
-class AccessListRuleView(generic.ObjectView):
-    queryset = models.AccessListRule.objects.all()
-
-
-class AccessListRuleListView(generic.ObjectListView):
-    queryset = models.AccessListRule.objects.all()
-    table = tables.AccessListRuleTable
-
-
-class AccessListRuleEditView(generic.ObjectEditView):
-    queryset = models.AccessListRule.objects.all()
-    form = forms.AccessListRuleForm
-
-
-class AccessListRuleDeleteView(generic.ObjectDeleteView):
-    queryset = models.AccessListRule.objects.all()
+    def post(self, request):
+        counter, created = AccessListCounter.objects.get_or_create(name="default")
+        counter.value += 1
+        counter.save()
+        return redirect('plugins:netbox_access_lists:counter')
